@@ -34,6 +34,7 @@ public class HelloJunitTest {
 		helloById.print();
 		
 		//Container 객체가 생성한 StringPrinter 스프링빈을 요청하기
+		//<property name="printer" ref="strPrinter" /> 이 설정을 테스트 한 것임
 		Printer printer = context.getBean("strPrinter", Printer.class);
 		assertEquals("Hello 스프링", printer.toString());
 	}
