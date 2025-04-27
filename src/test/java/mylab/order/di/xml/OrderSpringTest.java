@@ -16,7 +16,7 @@ public class OrderSpringTest {
 	ShoppingCart shoppingCart;
 	
 	@Autowired
-	OrderService orderservice;
+	OrderService orderService;
 	
 	@Test
 	void testShoppingCart() {
@@ -29,8 +29,10 @@ public class OrderSpringTest {
 	
 	@Test
 	void testOrderService() {
-		assertNotNull(orderservice);
-		
+		assertNotNull(orderService);
+		//assertEquals("products", orderService.getShoppingCart());
+		System.out.println(shoppingCart.getTotalPrice());
+		assertEquals(4000, orderService.calculateOrderTotal());
 	}
 
 }
