@@ -1,6 +1,7 @@
 package mylab.user.di.annot;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -20,10 +21,9 @@ public class UserServiceTest {
 	void testUserService() {
 		assertNotNull(userService);
 		assertNotNull(userService.getUserRepository());
-		String dbType = userService.getUserRepository().getDbType();
-		assertEquals("MySQL", dbType);
+		assertEquals("MySQL", userService.getUserRepository().getDbType());
 		assertNotNull(userService.getSecurityService());
-		boolean isRegistered = userService.registerUser();
-        assertTrue(isRegistered);
+		assertTrue(userService.registerUser("user1", "홍길동", "password123"));
+        assertFalse(userService.registerUser("user2", "김철수", ""));
 	}
 }

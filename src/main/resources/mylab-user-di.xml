@@ -8,10 +8,4 @@
 	<!-- Auto Component Scanning 설정 -->
 	<context:component-scan base-package="mylab.user.di.annot" />
 	
-	<!-- uvalues.properties 파일의 정보를 설정 -->
-	<context:property-placeholder location="classpath:uvalues.properties" />
-	
-	<bean id="userRepository" class="mylab.user.di.annot.UserRepository">
-    	<property name="dbType" value="MySQL"/>
-    </bean>
 </beans>
