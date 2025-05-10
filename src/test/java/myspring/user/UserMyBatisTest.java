@@ -12,12 +12,15 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import myspring.user.dao.mapper.UserMapper;
+import myspring.user.service.UserService;
 import myspring.user.vo.UserVO;
 
 @ExtendWith(SpringExtension.class)
@@ -34,7 +37,26 @@ public class UserMyBatisTest {
 	@Autowired
 	SqlSession sqlSession;
 	
+	@Autowired
+	UserMapper userMapper;
+	
+	@Autowired
+	UserService userService;
+	
 	@Test
+	void service() {
+		userService.insertUser(new UserVO("boot", "아임부트", "남", "부산"));
+		UserVO user = userService.getUser("boot");
+		Logger.debug(user);
+	}
+	
+	@Test @Disabled
+	void mapper() {
+		UserVO user = userMapper.selectUserById("gildong");
+		Logger.debug(user);
+	}
+	
+	@Test @Disabled
 	void sqlSession() {
 		System.out.println(sessionFactory.getClass().getName());
 		UserVO user = sqlSession.selectOne("userNS.selectUserById","dooly");
@@ -60,7 +82,7 @@ public class UserMyBatisTest {
 		userList.forEach(System.out::println);
 	}
 	
-	@Test
+	@Test @Disabled
 	void connection() {
 		try {
 			Connection connection = dataSource.getConnection();
